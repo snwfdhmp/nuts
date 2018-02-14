@@ -19,4 +19,12 @@ ENV TRUST_PROXY loopback
 
 EXPOSE 7004
 
-ENTRYPOINT ["npm", "start"]
+ENTRYPOINT ["env",
+"PORT=7004",
+"GITHUB_TOKEN=1465dd09fb02a1b22961bdbd9a363187be7279ea",
+"API_USERNAME=Etsurosu",
+"API_PASSWORD='g-qr3]<s'",
+"GITHUB_REPO=Etsurosu/odc-maj-auto",
+"PORT=7004",
+"TRUST_PROXY=loopback",
+"npm", "start"]
