@@ -6,9 +6,17 @@ var nuts = require('../');
 
 var app = express();
 
+var api_username = "Etsurosu";
+var api_password = "g-qr3]<s";
+var github_token = "1465dd09fb02a1b22961bdbd9a363187be7279ea";
+var github_repo = "Etsurosu/odc-maj-auto";
+var nuts_port = 7004;
+var trust_proxy="loopback";
+
+
 var apiAuth =  {
-    username: process.env.API_USERNAME,
-    password: process.env.API_PASSWORD
+    username: process.env.API_USERNAME || api_username,
+    password: process.env.API_PASSWORD || api_password
 };
 
 var analytics = undefined;
@@ -18,11 +26,11 @@ if (process.env.ANALYTICS_TOKEN) {
 }
 
 var myNuts = nuts.Nuts({
-    repository: process.env.GITHUB_REPO,
-    token: process.env.GITHUB_TOKEN,
+    repository: process.env.GITHUB_REPO || github_repo,
+    token: process.env.GITHUB_TOKEN || github_token,
     endpoint: process.env.GITHUB_ENDPOINT,
-    username: process.env.GITHUB_USERNAME,
-    password: process.env.GITHUB_PASSWORD,
+    username: process.env.GITHUB_USERNAME || api_username,
+    password: process.env.GITHUB_PASSWORD || api_password,
     timeout: process.env.VERSIONS_TIMEOUT,
     cache: process.env.VERSIONS_CACHE,
     refreshSecret: process.env.GITHUB_SECRET,
@@ -121,7 +129,7 @@ myNuts.init()
 
 // Start the HTTP server
 .then(function() {
-    var server = app.listen(process.env.PORT || 5000, function () {
+    var server = app.listen(process.env.PORT || nuts_port || 5000, function () {
         var host = server.address().address;
         var port = server.address().port;
 
